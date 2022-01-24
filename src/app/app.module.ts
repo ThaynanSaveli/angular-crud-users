@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppComponent } from './app.component';
 import { CandidatesComponent } from './components/candidates/candidates.component';
 import { AddCandidateComponent } from './components/add-candidate/add-candidate.component';
@@ -17,6 +18,7 @@ import { EditCandidateComponent } from './components/edit-candidate/edit-candida
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from 'src/shared/material.module';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { HeaderComponent } from './components/header/header.component';
     AddCandidateComponent,
     EditCandidateComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatTooltipModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,

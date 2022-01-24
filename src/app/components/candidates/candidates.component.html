@@ -1,1 +1,49 @@
-<p>candidates works!</p>
+<app-header></app-header>
+<mat-card class="mat-elevation-z8 card-height">
+  <div class="row">
+    <div class="col-6">
+      <h1><b>Candidatos</b></h1>
+    </div>
+    <div class="col-6 text-right">
+      <button mat-raised-button color="primary" type="button" (click)="goToAddCandidates()">
+        <mat-icon>add</mat-icon> Adicionar Candidato
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 mt-3">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome do Candidato </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> E-mail </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef> CPF </th>
+      <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab color="primary" class="m-2" mat-raised-button matTooltip="Editar Candidato"
+          (click)="editCandidate(element.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab color="warn" class="m-2" mat-raised-button matTooltip="Remover Candidato"
+          (click)="removeCandidate(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>
+<app-footer></app-footer>
