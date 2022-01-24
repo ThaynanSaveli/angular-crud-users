@@ -41,14 +41,19 @@ export class CandidatesComponent implements OnInit {
       if (result.value) {
         this.candidatesService.deleteCandidate(id).subscribe((response: any) => {
           Swal.fire('Sucesso!', 'O candidato foi removido com sucesso', 'success')
+          this.getCandidates();
         }, (error: any) => {
-          Swal.fire('Oops!', error.message, 'error')
+          if (error.status === 401) {
+            Swal.fire('Oops!', "Você não tem autorização para remover um candidato", 'error')
+          } else {
+            Swal.fire('Oops!', error.message, 'error')
+          }
         })
       }
     })
   }
 
-  ngOnInit(): void {
+  getCandidates() {
     let arr: User[] = [];
 
     this.candidatesService.getAllCandidates().subscribe((response: any) => {
@@ -65,6 +70,10 @@ export class CandidatesComponent implements OnInit {
     }, (error: any) => {
       console.log(error);
     });
+  }
+
+  ngOnInit(): void {
+    this.getCandidates();
   }
 
 }

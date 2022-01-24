@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { getToken } from 'src/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class CandidatesService {
   }
 
   deleteCandidate(id: number) {
-    const token = "123456"
+    const token = getToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`

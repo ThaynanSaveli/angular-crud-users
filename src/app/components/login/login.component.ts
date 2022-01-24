@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { setToken } from 'src/utils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -35,11 +37,15 @@ export class LoginComponent implements OnInit {
     if (this.password.value != "" && this.email.value != "") {
       this.loginService.login(this.email.value, this.password.value).subscribe(
         (response: any) => {
-          console.log(response);
+          setToken(response.access_token)
+          this.router.navigateByUrl('/candidates');
         }, (error: any) => {
-
+          if (error.status === 401) {
+            Swal.fire('Oops!', "Usuário não autorizado", 'error')
+          } else {
+            Swal.fire('Oops!', error.message, 'error')
+          }
         });
-      this.router.navigateByUrl('/candidates');
     }
   }
 
